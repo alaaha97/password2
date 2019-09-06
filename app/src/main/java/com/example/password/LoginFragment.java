@@ -53,7 +53,7 @@ public class LoginFragment extends DialogFragment {
         logIn.setOnClickListener( logInListener );
     }
 
-    private final View.OnClickListener logInListener = new View.OnClickListener() {
+    private View.OnClickListener logInListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
