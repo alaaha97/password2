@@ -1,6 +1,5 @@
 package com.example.password;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,15 +24,14 @@ import com.google.android.material.textfield.TextInputLayout;
 public class LoginFragment extends DialogFragment {
 
     Button logIn;
-    Button cancel;
     TextInputEditText userName;
     TextInputEditText userPassword;
     TextInputLayout passwordInputLayout;
     CheckBox saveLoginCheckBox;
-
     SharedPreferences sharedPreference;
     SharedPreferences.Editor editor;
-
+    String name = "admin";
+    String password = "12345678";
 
     @Nullable
     @Override
@@ -45,30 +44,30 @@ public class LoginFragment extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
 
         logIn = view.findViewById( R.id.login );
-        cancel = view.findViewById( R.id.cancel );
         userName = view.findViewById( R.id.userName );
         userPassword = view.findViewById( R.id.userPassword );
         passwordInputLayout = view.findViewById( R.id.passwordInputLayout );
         saveLoginCheckBox = view.findViewById( R.id.check_box );
 
-        Bundle bundle = getArguments();
-        userName.setText( bundle.getString( "userName" ) );
-        userPassword.setText( bundle.getString( "password" ) );
-
         userPassword.addTextChangedListener( passwordWatcher );
         logIn.setOnClickListener( logInListener );
     }
 
-    private View.OnClickListener logInListener = new View.OnClickListener() {
+    private final View.OnClickListener logInListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            ((MainActivity) getActivity()).userName.setText( userName.getText().toString() );
-            ((MainActivity) getActivity()).password.setText( userPassword.getText().toString() );
-            dismiss();
+            if(!name.equals( userName.getText().toString().trim() ) || !password.equals( userPassword.getText().toString().trim() )) {
+                Toast.makeText( getActivity(), "userName and/or Password are not correct", Toast.LENGTH_SHORT ).show();
+
+            } else {
+                ((MainActivity) getActivity()).userName.setText( userName.getText().toString() );
+                dismiss();
+
+            }
 
             if(saveLoginCheckBox.isChecked()) {
-                sharedPreference = PreferenceManager.getDefaultSharedPreferences( (MainActivity) getActivity() );
+                sharedPreference = PreferenceManager.getDefaultSharedPreferences( getActivity() );
                 editor = sharedPreference.edit();
                 editor.putString( "name", userName.getText().toString() );
                 editor.apply();
@@ -97,3 +96,7 @@ public class LoginFragment extends DialogFragment {
         }
     };
 }
+
+
+
+

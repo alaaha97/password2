@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="30dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <Button
@@ -80,22 +80,14 @@
                 android:layout_height="wrap_content"
                 android:text="Log In"
                 android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/cancel"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textAllCaps="false" />
         </LinearLayout>
 
         <CheckBox
             android:id="@+id/check_box"
-            android:text="Remember Me "
+            android:text="Stay Signed In"
             android:layout_gravity="left"
             android:layoutDirection="ltr"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
