@@ -49,6 +49,7 @@ public class LoginFragment extends DialogFragment {
         passwordInputLayout = view.findViewById( R.id.passwordInputLayout );
         saveLoginCheckBox = view.findViewById( R.id.check_box );
 
+        
         userPassword.addTextChangedListener( passwordWatcher );
         logIn.setOnClickListener( logInListener );
     }
