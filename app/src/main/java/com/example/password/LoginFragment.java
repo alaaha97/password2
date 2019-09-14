@@ -30,8 +30,9 @@ public class LoginFragment extends DialogFragment {
     CheckBox saveLoginCheckBox;
     SharedPreferences sharedPreference;
     SharedPreferences.Editor editor;
-    String name = "admin";
-    String password = "12345678";
+
+    String name = ("admin");
+    String password = ("12345678");
 
     @Nullable
     @Override
@@ -49,9 +50,9 @@ public class LoginFragment extends DialogFragment {
         passwordInputLayout = view.findViewById( R.id.passwordInputLayout );
         saveLoginCheckBox = view.findViewById( R.id.check_box );
 
-        
         userPassword.addTextChangedListener( passwordWatcher );
         logIn.setOnClickListener( logInListener );
+
     }
 
     private View.OnClickListener logInListener = new View.OnClickListener() {
@@ -59,23 +60,21 @@ public class LoginFragment extends DialogFragment {
         public void onClick(View view) {
 
             if(!name.equals( userName.getText().toString().trim() ) || !password.equals( userPassword.getText().toString().trim() )) {
-                Toast.makeText( getActivity(), "userName and/or Password are not correct", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( getActivity(),getString( R.string.message_toast ), Toast.LENGTH_SHORT ).show();
 
             } else {
                 ((MainActivity) getActivity()).userName.setText( userName.getText().toString() );
                 dismiss();
 
-            }
-
-            if(saveLoginCheckBox.isChecked()) {
-                sharedPreference = PreferenceManager.getDefaultSharedPreferences( getActivity() );
-                editor = sharedPreference.edit();
-                editor.putString( "name", userName.getText().toString() );
-                editor.apply();
+                if(saveLoginCheckBox.isChecked()) {
+                    sharedPreference = PreferenceManager.getDefaultSharedPreferences( getActivity() );
+                    editor = sharedPreference.edit();
+                    editor.putString(getString( R.string.name_key ), userName.getText().toString() );
+                    editor.apply();
+                }
             }
         }
     };
-
     private TextWatcher passwordWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -85,7 +84,7 @@ public class LoginFragment extends DialogFragment {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             if(charSequence.length() > passwordInputLayout.getCounterMaxLength()) {
-                passwordInputLayout.setError( "password is too long" );
+                passwordInputLayout.setError(getString( R.string.password_error ) );
             } else {
                 passwordInputLayout.setError( null );
             }
@@ -97,7 +96,3 @@ public class LoginFragment extends DialogFragment {
         }
     };
 }
-
-
-
-

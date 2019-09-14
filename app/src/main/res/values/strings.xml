@@ -5,4 +5,7 @@
     <string name="password">Password</string>
     <string name="log_in_btn">Log In</string>
     <string name="stay_signed_in">Stay Signed In</string>
+    <string name="password_error">password is too long</string>
+    <string name="message_toast">userName and/or password are not correct</string>
+    <string name="name_key">name</string>
 </resources>
